@@ -105,7 +105,7 @@ foreach ($cursor as $id => $rec)
 </script>
 </head>
 <body>
-<a href=StoredRuns.php><h1>NRTB On Gabbie</h1></a>
+<a href=StoredRuns.php><h1>NRTB on <?php print($_SERVER["SERVER_NAME"]) ?></h1></a>
 <h2>Reporting NRTB Dataset <?php print($sim_id); ?></h2>
 <table>
 <tr><th>SimID</th><th>Time Slice</th><th>Records</th><th>Seconds</th><th>Operations</th></tr>

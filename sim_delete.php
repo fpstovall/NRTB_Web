@@ -4,7 +4,7 @@
 <link rel="stylesheet" type="text/css" href="nrtb.css">
 </head>
 <body>
-<a href=index.php><h1>NRTB On Gabbie</h1></a>
+<a href=index.php><h1>NRTB On <?php print($_SERVER["SERVER_NAME"]) ?></h1></a>
 <?php
 $connection = new MongoClient(); // connects to localhost:27017
 $sims = $connection->nrtb->sim_setup;
