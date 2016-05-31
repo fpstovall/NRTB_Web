@@ -163,6 +163,8 @@ ksort($accumulator->by_times);
 ?>
 </table>
 <p><h3>Overall Calculation Times Summary</h3>
+<div id="pop_chart" style="width: 900px; height: 500px"></div>
+<div id="calc_chart" style="width: 900px; height: 500px"></div>
 <table>
 <tr><td></td><th colspan=3>Microseconds</th></tr>
 <tr><th>Quantas</th><th>Min</th><th>Average</th><th>Max</th></tr>
@@ -174,8 +176,7 @@ ksort($accumulator->by_times);
   print("<td class=n>".$accumulator->overall->max_calc."</td></tr>");
 ?>
 </table>
-<p><h3>Calculation Times by Object Count</h3>
-<div id="pop_chart" style="width: 900px; height: 500px"></div>
+<p><h3>Calculation Times by Object Count Detail</h3>
 <table>
 <tr><td></td><td></td><th colspan=3>Microseconds</th></tr>
 <tr><th>Population</th><th>Count</th><th>Min</th><th>Average</th><th>Max</th></tr>
@@ -190,8 +191,7 @@ foreach ($accumulator->by_pop as $key => $row)
 }
 ?>
 </table>
-<p><h3>Calculation Time Breakdown</h3>
-<div id="calc_chart" style="width: 900px; height: 500px"></div>
+<p><h3>Calculation Time Breakdown Detail</h3>
 <table>
 <tr><td></td><td></td><th colspan=3>Microseconds</th></tr>
 <tr><th>Microsecond Range</th><th>Count</th><th>Min</th><th>Average</th><th>Max</th></tr>
