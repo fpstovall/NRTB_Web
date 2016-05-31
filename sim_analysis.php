@@ -73,6 +73,8 @@ foreach ($cursor as $id => $rec)
   global $accumulator;
   $accumulator->accum($rec);
 }
+ksort($accumulator->by_pop);
+ksort($accumulator->by_times);
 ?>
 <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
 <script type="text/javascript">
@@ -103,6 +105,36 @@ foreach ($cursor as $id => $rec)
     chart.draw(data, options);
   }
 </script>
+
+<script type="text/javascript">
+  google.charts.setOnLoadCallback(drawCalcChart);
+
+  function drawCalcChart() {
+    var data = google.visualization.arrayToDataTable([
+      ['uSec', 'Count (Prior index to Current)']
+<?php
+  foreach ($accumulator->by_times as $ti => $data)
+  {
+    print("\n,['".(($ti+1)*100)."', ".$data->rec_count);
+    //print(",".$data->total_calc/$data->rec_count);
+    //print(",".$data->max_calc."]");
+    print("]");
+  }
+?>
+]);
+
+    var options = {
+      title: 'Calculation uSec Distribution',
+      legend: { position: 'bottom' }
+    };
+
+    var cchart = new google.visualization.LineChart(document.getElementById('calc_chart'));
+
+    cchart.draw(data, options);
+  }
+</script>
+
+
 </head>
 <body>
 <a href=StoredRuns.php><h1>NRTB on <?php print($_SERVER["SERVER_NAME"]) ?></h1></a>
@@ -148,7 +180,6 @@ foreach ($cursor as $id => $rec)
 <tr><td></td><td></td><th colspan=3>Microseconds</th></tr>
 <tr><th>Population</th><th>Count</th><th>Min</th><th>Average</th><th>Max</th></tr>
 <?php
-ksort($accumulator->by_pop);
 foreach ($accumulator->by_pop as $key => $row)
 {
   print("<tr><td>".$key."</td>");
@@ -160,11 +191,11 @@ foreach ($accumulator->by_pop as $key => $row)
 ?>
 </table>
 <p><h3>Calculation Time Breakdown</h3>
+<div id="calc_chart" style="width: 900px; height: 500px"></div>
 <table>
 <tr><td></td><td></td><th colspan=3>Microseconds</th></tr>
 <tr><th>Microsecond Range</th><th>Count</th><th>Min</th><th>Average</th><th>Max</th></tr>
 <?php
-ksort($accumulator->by_times);
 foreach ($accumulator->by_times as $key => $crow)
 {
   print("<tr><td>".($key*100)." to ".((($key+1)*100)-1)."</td>");
