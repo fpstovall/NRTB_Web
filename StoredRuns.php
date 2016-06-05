@@ -30,15 +30,26 @@ $quantas = $connection->nrtb->quanta;
     print("<td class=n>".number_format($qs,0,'',',')."</td>");
     print("<td class=n>".number_format(($rec["quanta"]*$qs), 2, '.', ',')."</td>");
     if ($qs > 0) {
-      print("<td class=good><a href=sim_analysis.php?id=".$rec["sim_id"].">[Summary]</a></td>");
+      print("<td><button class=good type=button onclick=\"summary(".$rec["sim_id"].")\">Summary</button></td>");
     } else {
       print("<td></td>");
     }
-    print("<td class=".$delclass."><a href=sim_delete.php?id=".$rec["sim_id"].">[Delete]</a></td>");
+    print("<td><button class=$delclass type=button onclick=\"del(".$rec["sim_id"].")\">Delete</button></td>");
     print("</tr>\n");
   };
 ?>
 </table>
+
+<script>
+function summary(id){
+  window.location.href = "sim_analysis.php?id="+id;
+};
+function del(id){
+  if (confirm("Do you want to delete "+id+"?")) {
+    window.location.href = "sim_delete.php?id="+id;
+  }
+};
+</script>
 
 </body>
 </html>
