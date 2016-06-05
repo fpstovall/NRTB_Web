@@ -157,7 +157,7 @@ ksort($accumulator->by_times);
     print("<td>".$rec["quanta"]."</td>");
     print("<td class=n>".number_format($qs,0,'',',')."</td>");
     print("<td class=n>".number_format(($rec["quanta"]*$qs), 2, '.', ',')."</td>");
-    print("<td class=".$delclass."><a href=sim_delete.php?id=".$rec["sim_id"].">[Delete]</a></td>");
+    print("<td><button class=$delclass type=button onclick=\"del(".$rec["sim_id"].")\">Delete</button></td>");
     print("</tr>\n");
   };
 ?>
@@ -206,6 +206,14 @@ foreach ($accumulator->by_times as $key => $crow)
 }
 ?>
 </table>
+
+<script>
+function del(id){
+  if (confirm("Do you want to delete "+id+"?")) {
+    window.location.href = "sim_delete.php?id="+id;
+  }
+};
+</script>
 
 </body>
 </html>
