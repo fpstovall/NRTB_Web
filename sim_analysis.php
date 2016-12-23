@@ -7,6 +7,7 @@
 /****************************************************
 This section gathers the data from the database
 ****************************************************/
+require 'vendor/autoload.php';
 $connection = new MongoClient(); // connects to localhost:27017
 $sims = $connection->nrtb->sim_setup;
 $quantas = $connection->nrtb->quanta;
